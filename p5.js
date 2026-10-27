@@ -1,10 +1,28 @@
 //curious to see if you actually look at these notes or not.
+//signature
+let signatureSize = 12;
+let sizeDirection = 1;
+let sizeSteps = 0;
+//xaxis
+let x = 200;
+let x1 = 200;
+let facespeed = 2;
+let earspeed = 4;
+//yaxis
+let y = 200;
+let y1 = 200;
+let y2 = 100;
+let ballspeed = 2;
+let ballspeed2 = 2;
+let glassespeed = 4;
+
 function setup() {
     createCanvas(400, 400);
   
 }
 function draw() {
     background(150);
+
     
 // Draw the mouse coordinates    
 fill(0);
@@ -33,11 +51,21 @@ triangle(200, 25, 245, 21, 225, 35)
 triangle(300, 63, 355, 88, 296, 76)
 triangle(353, 153, 368, 220, 360, 208)
 //ears
+x1 += earspeed;
+
+if (x1 > 275 || x1 < 125) {
+    earspeed *= -1;
+}
 fill(206, 204, 192);
-    circle(100, 230, 100);
-    circle(300, 230, 100);
+circle(x1 - 100, 230, 100);
+circle(x1 + 100, 230, 100);
 //face shape
-    ellipse(200, 200, 260, 325);
+x += facespeed;
+
+if (x > 387 || x < 13) {
+    facespeed *= -1;
+}
+ellipse(x, 200, 260, 325);
 //neck
     rect(130, 320, 140, 80);
 //iconic earring
@@ -56,12 +84,20 @@ fill(190, 190, 180)
 ellipse(140, 245, 70, 50);
 ellipse(270, 245, 70, 50);
 //balls
+y += ballspeed;
+if (y > 387 || y < 13) {
+    ballspeed *= -1;
+}
+y2 += ballspeed2;
+if (y2 > 387 || y2 < 13) {
+    ballspeed2 *= -1;
+}
 fill(1000, 1000, 1000)
 ellipse(140, 255, 65, 26);
 ellipse(270, 255, 65, 26);
 fill('black')
-circle(270, 255, 25);
-circle(140, 255, 25);
+circle(x, y, 25);
+circle(x, y2, 25);
 // hair bangs (more pain)
 fill(91, 62, 25)
 ellipse(200, 110, 260, 170);
@@ -77,17 +113,22 @@ triangle(200, 185, 230, 240, 220, 155)
 triangle(270, 175, 240, 258, 231, 178)
 triangle(286, 152, 286, 205, 326, 143)
 //glasses
+
+y1 += glassespeed;
+if (y1 > 387 || y1 < 13) {
+    glassespeed *= -1;
+}
 stroke(224, 223, 201)
 strokeWeight(4);
 fill(0, 0, 0, 0)
-circle(140, 240, 120);
-circle(270, 240, 120);
+circle(140, y1, 120);
+circle(270, y1, 120);
 //bluecolor 4 glasses
 stroke(90, 112, 252)
 strokeWeight(1);
 fill(0, 0, 0, 0)
-circle(140, 240, 122);
-circle(270, 240, 122);
+circle(140, y1, 122);
+circle(270, y1, 122);
 //nose
 stroke(0)
 strokeWeight(0);
@@ -108,16 +149,18 @@ stroke(127, 126, 127)
 strokeWeight(4)
 line(185, 323, 185, 313)
 line(193, 323, 193, 313)
-//the necessary "point" that is required in the rubric under rule number 4, "USE POINT(S)."
-fill(0)
-stroke(4)
-strokeWeight(4)
-point(19, 380);
-
 //signature obviously
 fill(0)
 stroke(0)
 strokeWeight(0)
-textSize(12)
+signatureSize += sizeDirection;
+sizeSteps++;
+
+if (sizeSteps === 20) {
+    sizeDirection *= -1;
+    sizeSteps = 0;
+}
+
+textSize(signatureSize);
 text("Linus Anderson", 10, 390)
 }
